@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100vh;
+  /* OCEAN HORIZON: Peach -> Champagne -> Gold -> Powder Blue */
+  background: linear-gradient(
+    180deg, 
+    #E6CAC7 0%,    /* Soft Pink */
+    #FAD9CF 15%,   /* Soft Peach (Top) */
+    #F7E7CE 40%,   /* Champagne */
+    #F1EAD8 65%,   /* Golden Sand */
+    #B0E0E6 80%   /* Pastel Powder Blue (Bottom) */
+  );
+  background-attachment: fixed; /* Keeps the gradient steady */
+  overflow-y: auto;
+  color: #FFFFF0;
+}
+
+/* Gilded Taupe Glass Effect */
+.frosted-glass {
+  /* Warm Taupe base */
+  background: rgba(93, 84, 75, 0.25) !important;
+  backdrop-filter: blur(25px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(120%) !important;
+  
+  /* Muted Gold Edge */
+  border: 1.5px solid rgba(197, 179, 130, 0.5); 
+  box-shadow: 
+    inset 0 0 15px rgba(197, 179, 130, 0.1), 
+    0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.aura-button {
+  background: rgba(197, 179, 130, 0.15);
+  border: 1px solid rgba(197, 179, 130, 0.4);
+  transition: all 0.4s ease;
+}
+
+.aura-button:hover {
+  background: rgba(197, 179, 130, 0.3);
+  box-shadow: 0 0 30px rgba(197, 179, 130, 0.5);
+  transform: translateY(-2px);
+}
+
+@keyframes border-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinning-border-active {
+  animation: border-spin 4s linear infinite;
+}
