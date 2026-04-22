@@ -3,16 +3,11 @@ import React, { useState, useEffect } from 'react';
 const Navbar = () => {
 const fullText = "Empowered Beloved Women";
   const [displayText, setDisplayText] = useState("");
-  const [loopCount, setLoopCount] = useState(0);
-  const maxLoops = 20;
+  
+  // This state exists only to trigger the re-run of the effect
+  const [trigger, setTrigger] = useState(0);
 
   useEffect(() => {
-    // If we've finished 5 loops, stop everything and show full text
-    if (loopCount >= maxLoops) {
-      setDisplayText(fullText);
-      return;
-    }
-
     let currentLetterIndex = 0;
     
     // START TYPING
@@ -24,19 +19,18 @@ const fullText = "Empowered Beloved Women";
         // FINISHED TYPING ONE ROUND
         clearInterval(typingInterval);
         
-        // WAIT 2 SECONDS, THEN RESET FOR NEXT LOOP
+        // WAIT 2 SECONDS, THEN RESET
         setTimeout(() => {
-          setDisplayText(""); // Clear text
-          setLoopCount(prev => prev + 1); // This triggers the useEffect to run again
+          setDisplayText(""); 
+          // Incrementing the trigger tells React to run this useEffect again
+          setTrigger(prev => prev + 1); 
         }, 2000);
       }
     }, 100);
 
-    return () => {
-      clearInterval(typingInterval);
-    };
-  }, [loopCount]); // The loopCount dependency is key here
-   
+    return () => clearInterval(typingInterval);
+  }, [trigger]); // Runs every time 'trigger' changes
+  
   return (
     <nav className="absolute top-0 left-0 w-full z-[100] bg-transparent">
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
